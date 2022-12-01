@@ -1,0 +1,176 @@
+<!doctype>
+<html>
+    <head>
+        <title>
+            Calculator
+        </title>
+        <style>
+            *{
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            
+            }
+            body{
+                background:#fff;
+               
+            }
+            .main{
+                
+                
+                background:#fff;
+                text-align: center;
+                width: 400px;
+                margin: 80px auto;
+                padding: 10px;
+
+                
+            }
+            form{
+                padding: 0 5px;
+                margin-bottom: 15px;
+                
+            }
+            .textview{
+                width: 100%;
+                height: 40px;
+                padding: 0 10px;
+                pointer-events: none;
+                
+
+            }
+            .clearfix:before, .clearfix:after{
+                content: '';
+                display: table;
+                clear: both;
+                width: 100%;
+                
+            }
+            .col-3{
+                width: 25%;
+                padding: 5px;
+                float: left;
+                
+
+            }
+            .col-6{
+                width:25%;
+                height: 160px;
+                padding:  5px;
+    
+                float: right;
+            }
+            .button{
+                width: 100%;
+                height: 40px;
+                outline: none;
+                
+            }
+            
+            .button.equal{
+                background: #359aed;
+                color: rgb(255, 255, 255);
+                font-size: 22px;
+                height: 190px;
+                border-style:none;
+            }
+            .button.operator{
+                background:lightgrey;
+                border-color: #d6d6d6;
+                color: #fff;
+                font-size: 20px;
+                
+            }
+        </style>
+    </head>
+    <body>
+        <div class="main">
+            <form name="form">
+              <input type="text" name="textview" class="textview"/>
+            </form>
+
+            <div class="clearfix">
+               <div class="col-3"><input type="button" value="&#43;" class="button operator" onclick="insert('+')"/></div>
+               <div class="col-3"><input type="button" value="&#8722;" class="button operator" onclick="insert('-')"/></div>
+               <div class="col-3"><input type="button" value="&#215;" class="button operator" onclick="insert('*')"/></div>
+               <div class="col-3"><input type="button" value="&#247;" class="button operator" onclick="insert('/')"/></div>
+               
+
+            
+               <div class="col-6"><input type="button" value="&#61;" class="button equal" onclick="equal(); time()"></div>
+
+                <div class="col-3"><input type="button" value="7" class="button" onclick="insert(7)"/></div>
+                <div class="col-3"><input type="button" value="8" class="button" onclick="insert(8)"/></div>
+                <div class="col-3"><input type="button" value="9" class="button" onclick="insert(9)"/></div>
+                
+                
+        
+                <div class="col-3"><input type="button" value="4" class="button" onclick="insert(4)"/></div>
+                <div class="col-3"><input type="button" value="5" class="button" onclick="insert(5)"/></div>
+                <div class="col-3"><input type="button" value="6" class="button" onclick="insert(6)"/></div>
+
+
+
+                <div class="col-3"><input type="button" value="1" class="button" onclick="insert(1)"/></div>
+                <div class="col-3"><input type="button" value="2" class="button" onclick="insert(2)"/></div>
+                <div class="col-3"><input type="button" value="3" class="button" onclick="insert(3)"/></div>
+                
+    
+
+             
+                <div class="col-3"><input type="button" value="0" class="button" onclick="insert(0)"/></div>
+                <div class="col-3"><input type="button" value="." class="button" onclick="insert('.')"/></div>
+                <div class="col-3"><input type="button" value="C" class="button " onclick="clean()"></div>
+                
+            
+             </div>
+             <div id="date"></div>
+        </div>
+        <script>
+            function insert(num)
+            {
+                var mystring=document.form.textview.value;
+                var lastchar=mystring[mystring.length-1];
+                if(mystring.length<30)
+                {
+                    if(!isNaN(lastchar)||lastchar==null||!isNaN(num))
+                    {
+                        document.form.textview.value=mystring+num;
+                    }
+                    else if(lastchar!=num)
+                    {
+                        document.form.textview.value=mystring.replace(lastchar,num);
+                    }
+                }
+            }
+            function equal()
+            {
+                var sum=document.form.textview.value;
+                document.form.textview.value=eval(sum);
+            }
+            var a=[];
+            function time()
+            { 
+                var today= new Date();
+                a.push(today);
+                var res="";
+                for(let i=0;i<a.length;i++)
+                {
+                        res+=a[i]+"<br/>";
+                }
+             
+                document.getElementById("date").innerHTML=res;
+            
+            }
+            function back()
+            {
+                var exp=document.form.textview.value;
+                document.form.textview.value=exp.supstring(0,exp.length-1);
+            }
+            function clean()
+            {
+                document.form.textview.value='';
+            }
+        </script>
+    </body>
+</html>
